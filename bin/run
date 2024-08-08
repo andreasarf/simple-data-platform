@@ -1,0 +1,12 @@
+#!/bin/bash
+
+PORT=8080
+
+if [ -n "$1" ]; then
+  echo use port $1
+  PORT=$1
+else
+  echo use default port $PORT
+fi
+
+docker-compose run --rm -p $PORT:8080 app
