@@ -1,0 +1,8 @@
+logging:
+  level:
+    root: INFO
+    org.andreasarf: DEBUG
+
+dataset:
+  file:
+    path: dataset.parquet

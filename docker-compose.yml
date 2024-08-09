@@ -4,6 +4,6 @@ services:
       context: .
     container_name: docker-app-21
     environment:
-      - SPRING_PROFILES_ACTIVE=local
+      - SPRING_PROFILES_ACTIVE=docker
     ports:
       - "8080:8080"
