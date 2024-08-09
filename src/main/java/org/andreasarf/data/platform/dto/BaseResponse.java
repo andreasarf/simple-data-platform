@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import org.andreasarf.data.platform.common.enums.ErrorCode;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+@JsonPropertyOrder({ "code", "message", "error_reasons", "data"})
 public class BaseResponse<T> implements Serializable {
 
   @JsonIgnore
@@ -26,9 +28,23 @@ public class BaseResponse<T> implements Serializable {
   private List<String> errorReasons;
   private T data;
 
+  public static <T> BaseResponse<T> ok(T data) {
+    return BaseResponse.<T>builder()
+        .errorCode(ErrorCode.OK)
+        .data(data)
+        .build();
+  }
+
   public static <T> BaseResponse<T> invalidParam(String reason) {
     return BaseResponse.<T>builder()
         .errorCode(ErrorCode.INVALID_PARAM)
+        .errorReason(reason)
+        .build();
+  }
+
+  public static <T> BaseResponse<T> internalError(String reason) {
+    return BaseResponse.<T>builder()
+        .errorCode(ErrorCode.INTERNAL_ERROR)
         .errorReason(reason)
         .build();
   }
