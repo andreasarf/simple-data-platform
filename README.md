@@ -40,7 +40,7 @@ dataset:
 
 1. Get Total Trips
     ```bash
-    curl -X GET "http://localhost:8080/api/v1/data//total-trips?start={start_date}&end={end_date}"
+    curl -X GET "http://localhost:8080/api/v1/data/total-trips?start={start_date}&end={end_date}"
     ```
 2. Get Average Fare Heatmap
     ```bash
